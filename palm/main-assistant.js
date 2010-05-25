@@ -8,17 +8,14 @@ MainAssistant.prototype.doUpdateCheck = function() {
 	// URL to the app details page for your app
 	var url = "http://developer.palm.com/webChannel/index.php?packageid=" + Mojo.Controller.appInfo.id;
 	
+	// do AJAX request
 	var request = new Ajax.Request(url, {
 		method: 'get',
 		evalJSON: 'false',
 		onSuccess: this.gotResults.bind(this), // if you get results, check to see if there's an update
-		onFailure: this.gotNothing.bind(this) // if the check fails, just continue as if there's no update
+		// we're only concerned with success
 	});
 	
-}
-
-MainAssistant.prototype.gotNothing = function() {
-	// if there's a failure getting the version, do nothing	
 }
 
 MainAssistant.prototype.gotResults = function(transport) {
@@ -38,14 +35,14 @@ MainAssistant.prototype.gotResults = function(transport) {
 		// show update dialog
 		this.controller.showAlertDialog({                            
             		onChoose: function(value) {                                         
-                		if (value === "upgrade") {                                      
+                		if (value === "update") {                                      
                 			this.launchUpdate();                            
                 		}                                                           
             		},                                                                  
             		title: $L("New Version Available"),                                 
-            		message: $L("Version " + Mojo.Controller.appInfo.version + " of " + Mojo.Controller.appInfo.title + " is available. Would you like to upgrade?"),
+            		message: Mojo.Controller.appInfo.title + " v" + version + " " + $L("is available. Would you like to update?"),
             		choices: [                                                          
-            			{ label: $L("Upgrade"), value: "upgrade", type: "affirmative" },
+            			{ label: $L("Download Update"), value: "update", type: "affirmative" },
             			{ label: $L("Cancel"), value: "cancel", type: "negative" }      
             		]                                                                   
         	});          	
