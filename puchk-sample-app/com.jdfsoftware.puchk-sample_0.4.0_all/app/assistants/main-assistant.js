@@ -1,6 +1,7 @@
 function MainAssistant() {}
 
 MainAssistant.prototype.setup = function() {
+	// do update checking
 	this.doUpdateCheck();
 };
 
@@ -11,17 +12,14 @@ MainAssistant.prototype.doUpdateCheck = function() {
 	// in your app, you would use the following:
 	//var url = "http://developer.palm.com/webChannel/index.php?packageid=" + Mojo.Controller.appInfo.id;
 	
+	// do AJAX request
 	var request = new Ajax.Request(url, {
 		method: 'get',
 		evalJSON: 'false',
 		onSuccess: this.gotResults.bind(this), // if you get results, check to see if there's an update
-		onFailure: this.gotNothing.bind(this) // if the check fails, just continue as if there's no update
+		// we're only interested in success
 	});
 	
-}
-
-MainAssistant.prototype.gotNothing = function() {
-	// if there's a failure getting the version, do nothing	
 }
 
 MainAssistant.prototype.gotResults = function(transport) {
@@ -40,18 +38,18 @@ MainAssistant.prototype.gotResults = function(transport) {
 				
 		// show update dialog
 		this.controller.showAlertDialog({                            
-            onChoose: function(value) {                                         
-                if (value === "upgrade") {                                      
-                    this.launchUpdate();                            
-                }                                                           
-            },                                                                  
-            title: $L("New Version Available"),                                 
-            message: $L("Version " + Mojo.Controller.appInfo.version + " of " + Mojo.Controller.appInfo.title + " is available. Would you like to upgrade?"),
-            choices: [                                                          
-                { label: $L("Upgrade"), value: "upgrade", type: "affirmative" },
-                { label: $L("Cancel"), value: "cancel", type: "negative" }      
-            ]                                                                   
-        });          	
+            		onChoose: function(value) {                                         
+                		if (value === "update") {                                      
+                			this.launchUpdate(); // if they tap the update button, launch the app catalog                         
+                		}                                                           
+            		},                                                                  
+            		title: $L("Update Available"),                                 
+            		message: Mojo.Controller.appInfo.title + " v" + version + " " + $L("is available. Would you like to update?"),
+            		choices: [                                                          
+            			{ label: $L("Update"), value: "update", type: "affirmative" },
+            			{ label: $L("Cancel"), value: "cancel", type: "negative" }      
+            		]                                                                   
+        	});          	
 	}
 			
 	// if there's no update, do nothing
