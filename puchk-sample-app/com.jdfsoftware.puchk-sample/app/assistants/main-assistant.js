@@ -1,22 +1,6 @@
 function MainAssistant() {}
 
 MainAssistant.prototype.setup = function() {
-<<<<<<< HEAD
-	this.puchkDoUpdateCheck();
-};
-
-MainAssistant.prototype.puchkDoUpdateCheck = function() {
-	// URL to the app details page for your app
-	var url = "http://developer.palm.com/webChannel/index.php?packageid=" + Mojo.Controller.appInfo.id;
-	
-	// do AJAX request
-	var request = new Ajax.Request(url, {
-		method: 'get',
-		evalJSON: 'false',
-		onSuccess: this.puchkGotResults.bind(this), // if you get results, check to see if there's an update
-		// we're only concerned with success
-	});
-=======
 	/* Usage:
 	 * this.puchkDoUpdateCheck(interval);
 	 * where interval is the minimum number of hours between update checks
@@ -53,13 +37,10 @@ MainAssistant.prototype.puchkDoUpdateCheck = function(interval) {
 	}
 
 	// else if the cookie exists, do nothing since the interval hasn't expired
->>>>>>> testing
 	
 }
 
 MainAssistant.prototype.puchkGotResults = function(transport) {
-<<<<<<< HEAD
-=======
 
 	// if we have success in the AJAX request, then we have an actual check occurring and we can
 	// set a cookie
@@ -70,7 +51,6 @@ MainAssistant.prototype.puchkGotResults = function(transport) {
 
 	// set a new cookie to expire at interval hours from now
 	this.puchkCookieRef.put({},expire);
->>>>>>> testing
 	
 	// the entire HTML source of the Palm app details web page into a string	
 	var HTMLStr = transport.responseText;
@@ -83,14 +63,11 @@ MainAssistant.prototype.puchkGotResults = function(transport) {
 		
 	// if the returned version is greater than the current version
 	if (this.puchkVerComp(version)) {
-<<<<<<< HEAD
-=======
 
 		var appData = {
 				title: Mojo.Controller.appInfo.title,
 				version: version
 				};
->>>>>>> testing
 				
 		// show update dialog
 		this.controller.showAlertDialog({                            
@@ -100,11 +77,7 @@ MainAssistant.prototype.puchkGotResults = function(transport) {
                 		}                                                           
             		},                                                                  
             		title: $L("Update Available"),                                 
-<<<<<<< HEAD
-            		message: Mojo.Controller.appInfo.title + " v" + version + " " + $L("is available. Would you like to update?"),
-=======
 			message: $L("#{title} v#{version} is available. Would you like to update?").interpolate(appData),
->>>>>>> testing
             		choices: [                                                          
             			{ label: $L("Download Update"), value: "update", type: "affirmative" },
             			{ label: $L("Cancel"), value: "cancel", type: "negative" }      
