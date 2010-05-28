@@ -1,0 +1,63 @@
+/* splash scene */
+div#splashImg {
+/* make 100% wide and 100% high splash image, regardless of device dimensions (Pre/Pixi) */
+position:fixed;
+top:0px;
+left:0px;
+bottom:0px;
+width:320px; /* full width */
+/* set the background for the splash scene
+ * you could also use center center instead of 0px 0px */
+background:url(../images/splash.png) 0px 0px no-repeat fixed;
+background-color:#000;
+z-index:1;
+}
+
+div#ver {
+position:fixed;
+bottom:75px;
+color:#000;
+font-size:3em;
+z-index:3;
+}
+
+div#updateCheck {
+/* change these styles as you see fit - currently it places the 
+ * Checking.. / Continue button at the bottom left of the scene */
+position:fixed;
+bottom:10px;
+z-index:2;
+}
+
+
+/* update scene */
+div#updateBg {
+/* make 100% wide and 100% high background image, regardless of device dimensions (Pre/Pixi) */
+position:fixed;
+top:0px;
+left:0px;
+bottom:0px;
+width:320px;
+background:url(../images/update.png) 0px 0px no-repeat fixed;
+background-color:#fff;
+z-index:1;
+}
+
+div#updateContainer {
+/* I like an image in the background. This allows you to have that
+ * background image but still have scrollable content above - the
+ * position MUST be fixed for the Bg, absolute for the content or
+ * the content will not scroll */
+position:absolute;
+top:0px;
+left:0px;
+width:320px; /* full width */
+height:100%; /* expand to fit contents */
+/* text color */
+color:#000;
+z-index:2;
+}
+
+
+
+/* other css styles for other scenes here */
