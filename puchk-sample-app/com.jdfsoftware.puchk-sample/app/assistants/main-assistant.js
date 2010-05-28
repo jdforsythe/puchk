@@ -6,6 +6,15 @@ MainAssistant.prototype.setup = function() {
 	 * where interval is the minimum number of hours between update checks
 	 */
 	this.puchkDoUpdateCheck(24);
+
+	// for testing you can use:
+	// 30 seconds:
+	// this.puchkDoUpdateCheck(0.0083);
+	// 1 minute:
+	// this.puchkDoUpdateCheck(0.0167);
+	// 5 minutes:
+	// this.puchkDoUpdateCheck(0.083);
+	// etc.
 };
 
 MainAssistant.prototype.puchkDoUpdateCheck = function(interval) {
@@ -25,6 +34,7 @@ MainAssistant.prototype.puchkDoUpdateCheck = function(interval) {
 		// using Tune Your Guitar Pro (at v1.0.1 at the time of this writing) to force the update scene
 		var url = "http://developer.palm.com/webChannel/index.php?packageid=com.jdfsoftware.tuneyourguitarpro";
 		// in your app, you would use the following:
+		// URL to your app details page on Palm's web site
 		//var url = "http://developer.palm.com/webChannel/index.php?packageid=" + Mojo.Controller.appInfo.id;
 	
 		// do AJAX request
@@ -55,11 +65,16 @@ MainAssistant.prototype.puchkGotResults = function(transport) {
 	// the entire HTML source of the Palm app details web page into a string	
 	var HTMLStr = transport.responseText;
 	
-	// look for Version: in the source and get the text between that and <br/>, this is the version string
-	var start = HTMLStr.indexOf("Version: ");
-	var end = HTMLStr.indexOf("<br/>", start);
-	
-	var version = HTMLStr.slice(start+9, end);	
+	// regular expression that looks for a string of the form "Version: #.#.#<br/>" in the web page
+	// and returns only the "Version: #.#.#" part (JavaScript supports lookaheads but not lookbehinds)
+	var patt = /Version:\s[0-9\.]+(?=<br\/>)/;
+
+	// use the pattern to get the match from the web page
+	var toSlice = HTMLStr.match(patt).toString();
+
+	// JavaScript doesn't support lookbehinds, so we need to slice "Version: " (9 chars) from the beginning of the string
+	// leaving us with a nice "#.#.#"
+	var version = toSlice.slice(9);
 		
 	// if the returned version is greater than the current version
 	if (this.puchkVerComp(version)) {
