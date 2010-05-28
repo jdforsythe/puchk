@@ -1,11 +1,10 @@
 function MainAssistant() {}
 
 MainAssistant.prototype.setup = function() {
-	// do the update checking
-	this.doUpdateCheck();
+	this.puchkDoUpdateCheck();
 };
 
-MainAssistant.prototype.doUpdateCheck = function() {
+MainAssistant.prototype.puchkDoUpdateCheck = function() {
 	// URL to the app details page for your app
 	var url = "http://developer.palm.com/webChannel/index.php?packageid=" + Mojo.Controller.appInfo.id;
 	
@@ -13,13 +12,13 @@ MainAssistant.prototype.doUpdateCheck = function() {
 	var request = new Ajax.Request(url, {
 		method: 'get',
 		evalJSON: 'false',
-		onSuccess: this.gotResults.bind(this), // if you get results, check to see if there's an update
-		// we're only interested in success
+		onSuccess: this.puchkGotResults.bind(this), // if you get results, check to see if there's an update
+		// we're only concerned with success
 	});
 	
 }
 
-MainAssistant.prototype.gotResults = function(transport) {
+MainAssistant.prototype.puchkGotResults = function(transport) {
 	
 	// the entire HTML source of the Palm app details web page into a string	
 	var HTMLStr = transport.responseText;
@@ -31,28 +30,28 @@ MainAssistant.prototype.gotResults = function(transport) {
 	var version = HTMLStr.slice(start+9, end);	
 		
 	// if the returned version is greater than the current version
-	if (this.verComp(version)) {
+	if (this.puchkVerComp(version)) {
 				
 		// show update dialog
 		this.controller.showAlertDialog({                            
             		onChoose: function(value) {                                         
                 		if (value === "update") {                                      
-                			this.launchUpdate(); // if they tap the update button, launch the app catalog                         
+                			this.puchkLaunchUpdate();                            
                 		}                                                           
             		},                                                                  
             		title: $L("Update Available"),                                 
             		message: Mojo.Controller.appInfo.title + " v" + version + " " + $L("is available. Would you like to update?"),
             		choices: [                                                          
-            			{ label: $L("Update"), value: "update", type: "affirmative" },
+            			{ label: $L("Download Update"), value: "update", type: "affirmative" },
             			{ label: $L("Cancel"), value: "cancel", type: "negative" }      
             		]                                                                   
-        	});       	
+        	});          	
 	}
 			
 	// if there's no update, do nothing
 }
 
-MainAssistant.prototype.launchUpdate = function() {
+MainAssistant.prototype.puchkLaunchUpdate = function() {
 	// when the update button is tapped, send the user to the App Catalog for your app	
 	var url = "http://developer.palm.com/appredirect/?packageid=" + Mojo.Controller.appInfo.id;
 
@@ -63,10 +62,10 @@ MainAssistant.prototype.launchUpdate = function() {
 		});
 }
 
-MainAssistant.prototype.verComp = function(v) {
+MainAssistant.prototype.puchkVerComp = function(v) {
 	
-	var upd = this.splitVer(v); // most up-to-date version, from the Palm app details page
-	var cur = this.splitVer(Mojo.Controller.appInfo.version); // get current app version from appinfo.js
+	var upd = this.puchkSplitVer(v); // most up-to-date version, from the Palm app details page
+	var cur = this.puchkSplitVer(Mojo.Controller.appInfo.version); // get current app version from appinfo.js
 	
 	// upd can't be lower than cur or it wouldn't be published
 	if (	(upd.major > cur.major) // this is a new major version
@@ -78,7 +77,7 @@ MainAssistant.prototype.verComp = function(v) {
 	else { return false; }
 }
 
-MainAssistant.prototype.splitVer = function(v) {
+MainAssistant.prototype.puchkSplitVer = function(v) {
 	
 	var x = v.split('.');
 	
