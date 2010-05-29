@@ -1,6 +1,6 @@
 puchk
 Palm (webOS) Update Check Framework
-v0.4.0
+v0.5.1
 JDF Software
 http://www.jdf-software.com/
 http://github.com/jdfsoftware/puchk
@@ -16,23 +16,44 @@ puchk is a framework for displaying update notifications to users of your webOS 
 
 The framework has been updated to check for the update asynchronously, and therefore not interrupt your app.
 It has also become extremely easy to plug into your new or existing applications.
-This newest update fixes the bug where the wrong version shows in the dialog and the bug where the string couldn't be localized properly
+This newest update:
+- further fixes string localization
+- using RegExp to parse the web site instead of simple string searches (in case you use the text "Version:" in your app description)
+- added functionality to only check after minimum number of hours
+- renamed all the functions to begin with puchk to prevent interference with your apps
 
-=====
-USAGE
-=====
+0.5.1 brings Ares sample app and framework code
 
-There is now only one file in the puchk framework, /palm/main-assistant.js
+===================
+USAGE FOR SDK APPS
+===================
+
+There is now only one file you need worry about in the puchk framework, /palm/main-assistant.js
 
 1) Copy and paste everything from this file, below (and not including) the setup() function, into your app's main (first scene) assistant file.
 
 2) Find and replace (normally CTRL+H on Windows or Linux) "MainAssistant" with the name of your assistant (e.g. "FirstAssistant", etc.)
 
-3) Add the call to this.doUpdateCheck(); in your setup() function. Don't do this in activate(), or it will keep checking for updates every time the user switches back to your app from a different one, or switches back to that scene.
+3) Modify the call to this.doUpdateCheck(interval); in your setup() function. interval is the number of hours you want to require in between update checks (so if the user uses your app multiple times per day, it will only check after the number of hours has elapsed).
 
 4) Optionally, you can edit the text that is shown in the dialog. This is in the gotResults() function.
 
 That's it! puchk update checking is now enabled in your app! Check it out!
+
+===================
+USAGE FOR ARES APPS
+===================
+
+There is now only one file you need worry about in the puchk framework, /palm/ares-main-assistant.js
+
+1) Copy and paste everything from this file, below (and not including) the setup() or cleanup() functions, into your app's main (first scene) assistant file.
+
+2) Modify the call to this.doUpdateCheck(interval); in your setup() function. interval is the number of hours you want to require in between update checks (so if the user uses your app multiple times per day, it will only check after the number of hours has elapsed).
+
+4) Optionally, you can edit the text that is shown in the dialog. This is in the gotResults() function.
+
+That's it! puchk update checking is now enabled in your app! Check it out!
+
 
 =====================================
 TESTING PUCHK IN YOUR APP
@@ -49,6 +70,6 @@ Previous line of code:
 
 New line of code:
 	var url = "http://developer.palm.com/webChannel/index.php?packageid=com.jdfsoftware.tuneyourguitarpro";
-	(Hint: Tune Your Guitar Pro is currently at v1.0.1 as of May 20, 2010)
+	(Hint: Tune Your Guitar Pro is currently at v1.0.1 as of May 28, 2010)
 
 This will fool puchk into getting the version for the other app with a higher version number for your testing purposes. Be sure to change the code back before publishing!
