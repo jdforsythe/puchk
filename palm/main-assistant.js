@@ -19,7 +19,7 @@ MainAssistant.prototype.setup = function() {
 
 MainAssistant.prototype.puchkDoUpdateCheck = function(interval) {
 
-	this.interval = interval;
+	this.puchkInterval = interval;
 
 	// reference to the cookie, if it exists
 	this.puchkCookieRef = new Mojo.Model.Cookie(Mojo.Controller.appInfo.title + "_puchk");
@@ -54,7 +54,7 @@ MainAssistant.prototype.puchkGotResults = function(transport) {
 
 	// expire is now + (interval(hours) * 3600000 milliseconds per hour)
 	var expire = new Date();
-	expire.setTime(expire.getTime()+(this.interval*3600000));
+	expire.setTime(expire.getTime()+(this.puchkInterval*3600000));
 
 	// set a new cookie to expire at interval hours from now
 	this.puchkCookieRef.put({},expire);
