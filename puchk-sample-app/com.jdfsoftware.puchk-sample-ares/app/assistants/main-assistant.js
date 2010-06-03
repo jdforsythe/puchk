@@ -56,23 +56,24 @@ MainAssistant.prototype = {
 		// if the returned version is greater than the current version
 		if (this.puchkVerComp(version)) {
 			var appData = {
-					title: Mojo.Controller.appInfo.title,
+					title: $L(Mojo.Controller.appInfo.title),
 					version: version
 					};
+				
 			// show update dialog
 			this.controller.showAlertDialog({                            
-								onChoose: function(value) {                                         
-									if (value === "update") {                                      
-										this.puchkLaunchUpdate();                            
-									}                                                           
-								},                                                                  
-								title: $L("Update Available"),                                 
-								message: $L("#{title} v#{version} is available. Would you like to update?").interpolate(appData),
-								choices: [                                                          
-									{ label: $L("Download Update"), value: "update", type: "affirmative" },
-									{ label: $L("Cancel"), value: "cancel", type: "negative" }      
-								]                                                                   
-			});
+	            		onChoose: function(value) {                                         
+	                		if (value === "update") {                                      
+	                			this.puchkLaunchUpdate();                            	
+	                		} 
+	            		},                                                                  
+	            		title: $L({value: "Update Available", key: "puchk_dialog_title"}),                                 
+				message: $L({value: "#{title} v#{version} is available. Would you like to update?", key: "puchk_dialog_message"}).interpolate(appData),
+	            		choices: [                                                          
+	            			{ label: $L({value: "Download Update", key: "puchk_download_label"}), value: "update", type: "affirmative" },
+	            			{ label: $L({value: "Cancel", key: "puchk_cancel_label"}), value: "cancel", type: "negative" }      
+	            		]                                                                   
+	        	}); 
 		}
 		// if there's no update, do nothing
 	},

@@ -1,6 +1,6 @@
 puchk
 Palm (webOS) Update Check Framework
-v0.5.1
+v0.6.0
 JDF Software
 http://www.jdf-software.com/
 http://github.com/jdfsoftware/puchk
@@ -16,13 +16,24 @@ puchk is a framework for displaying update notifications to users of your webOS 
 
 The framework has been updated to check for the update asynchronously, and therefore not interrupt your app.
 It has also become extremely easy to plug into your new or existing applications.
-This newest update:
+
+=========
+Changelog
+=========
+
+0.6.0:
+- better localization including:
+  - workaround for webOS bug that fails to localize app titles via Mojo.Controller.appInfo.title
+  - using keys for localization strings
+
+0.5.1:
+- Ares sample app and framework code
+
+0.5.0:
 - further fixes string localization
 - using RegExp to parse the web site instead of simple string searches (in case you use the text "Version:" in your app description)
 - added functionality to only check after minimum number of hours
 - renamed all the functions to begin with puchk to prevent interference with your apps
-
-0.5.1 brings Ares sample app and framework code
 
 ===================
 USAGE FOR SDK APPS
