@@ -77,7 +77,7 @@ MainAssistant.prototype.puchkGotResults = function(transport) {
 	if (this.puchkVerComp(version)) {
 
 		var appData = {
-				title: Mojo.Controller.appInfo.title,
+				title: $L(Mojo.Controller.appInfo.title),
 				version: version
 				};
 				
@@ -88,11 +88,11 @@ MainAssistant.prototype.puchkGotResults = function(transport) {
                 			this.puchkLaunchUpdate();                            
                 		}                                                           
             		},                                                                  
-            		title: $L("Update Available"),                                 
-			message: $L("#{title} v#{version} is available. Would you like to update?").interpolate(appData),
+            		title: $L({value: "Update Available", key: "puchk_dialog_title"}),                                 
+			message: $L({value: "#{title} v#{version} is available. Would you like to update?", key: "puchk_dialog_message"}).interpolate(appData),
             		choices: [                                                          
-            			{ label: $L("Download Update"), value: "update", type: "affirmative" },
-            			{ label: $L("Cancel"), value: "cancel", type: "negative" }      
+            			{ label: $L({value: "Download Update", key: "puchk_download_label"}), value: "update", type: "affirmative" },
+            			{ label: $L({value: "Cancel", key: "puchk_cancel_label"}), value: "cancel", type: "negative" }      
             		]                                                                   
         	});          	
 	}
