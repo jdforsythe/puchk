@@ -3,7 +3,7 @@
 	"version": "0.6.0",
 	"vendor": "JDF Software",
 	"type": "web",
-	"main": "index.html",
+	"main": "../../index.html",
 	"title": "puchk sample",
-	"icon": "icon.png"
+	"icon": "../../icon.png"
 }

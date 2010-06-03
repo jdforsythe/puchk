@@ -5,7 +5,7 @@ MainAssistant.prototype.setup = function() {
 	 * this.puchkDoUpdateCheck(interval);
 	 * where interval is the minimum number of hours between update checks
 	 */
-	this.puchkDoUpdateCheck(24);
+	this.puchkDoUpdateCheck(0.0083);
 
 	// for testing you can use:
 	// 30 seconds:
@@ -80,7 +80,7 @@ MainAssistant.prototype.puchkGotResults = function(transport) {
 	if (this.puchkVerComp(version)) {
 
 		var appData = {
-				title: Mojo.Controller.appInfo.title,
+				title: $L(Mojo.Controller.appInfo.title),
 				version: version
 				};
 				
