@@ -85,7 +85,8 @@ MainAssistant.prototype.puchkGotResults = function(transport) {
 		this.controller.showAlertDialog({                            
             		onChoose: function(value) {                                         
                 		if (value === "update") {                                      
-                			this.puchkLaunchUpdate();                            
+                			this.puchkLaunchUpdate();
+					window.close();                            
                 		}                                                           
             		},                                                                  
             		title: $L({value: "Update Available", key: "puchk_dialog_title"}),                                 

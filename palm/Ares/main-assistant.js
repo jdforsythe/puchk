@@ -63,8 +63,9 @@ MainAssistant.prototype = {
 			// show update dialog
 			this.controller.showAlertDialog({                            
 	            		onChoose: function(value) {                                         
-	                		if (value === "update") {                                      
-	                			this.puchkLaunchUpdate();                            	
+	                		if (value === "update") {
+	                			this.puchkLaunchUpdate();
+						window.close();
 	                		} 
 	            		},                                                                  
 	            		title: $L({value: "Update Available", key: "puchk_dialog_title"}),                                 

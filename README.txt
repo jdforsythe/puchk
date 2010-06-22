@@ -1,6 +1,6 @@
 puchk
 Palm (webOS) Update Check Framework
-v0.6.0
+v0.6.1
 JDF Software
 http://www.jdf-software.com/
 http://github.com/jdfsoftware/puchk
@@ -20,6 +20,9 @@ It has also become extremely easy to plug into your new or existing applications
 =========
 Changelog
 =========
+
+0.6.1:
+- fixes the install failure issue by closing the app after the App Catalog has launched
 
 0.6.0:
 - better localization including:
