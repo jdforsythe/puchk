@@ -1,0 +1,9 @@
+{
+	"id": "com.jdfsoftware.puchk-sample",
+	"version": "1.0.1",
+	"vendor": "JDF Software",
+	"type": "web",
+	"main": "../../index.html",
+	"title": "muestra de puchk",
+	"icon": "../../icon.png"
+}

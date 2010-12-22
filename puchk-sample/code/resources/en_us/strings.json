@@ -1,0 +1,8 @@
+{
+    "puchk sample"		: "puchk sample",
+    "puchk_dialog_title"	: "Update Available",
+    "puchk_dialog_message"	: "#{title} v#{version} available. Download now?",
+    "puchk_download_label"	: "Download the update",
+    "puchk_never_label"		: "Don't ask again",
+    "puchk_cancel_label"	: "Ask me later"
+}

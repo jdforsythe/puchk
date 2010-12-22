@@ -1,9 +1,0 @@
-{
-	"id": "com.jdfsoftware.puchk-sample",
-	"version": "0.6.1",
-	"vendor": "JDF Software",
-	"type": "web",
-	"main": "../../index.html",
-	"title": "puchk sample",
-	"icon": "../../icon.png"
-}
