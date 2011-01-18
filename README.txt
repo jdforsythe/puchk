@@ -1,6 +1,6 @@
 puchk
 Palm (webOS) Update Check Framework
-v1.0.1
+v1.0.2
 JDF Software
 http://www.jdf-software.com/puchk
 jdfsoftware@gmail.com
