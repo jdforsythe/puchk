@@ -67,6 +67,8 @@ function puchk(interval, parent) {
 	};
 
 	this.results = function(transport) {
+	
+	   var that = this;
 
 		// Mojo.Log.info("puchk: Got data from Palm's site...");
 
@@ -119,7 +121,7 @@ function puchk(interval, parent) {
 
 						if (value === "update") {
 									    
-						this.updateApp();
+						that.updateApp();
 						window.close(); // force app to close to prevent failed update installs
                         // use the next line instead of window.close() if you have a multi-stage app - thanks sidamos!
                         // Mojo.Controller.getAppController().closeAllStages();
@@ -183,7 +185,7 @@ function puchk(interval, parent) {
 		// when the update button is tapped, send the user to the App Catalog for your app	
 		var url = "http://developer.palm.com/appredirect/?packageid=" + Mojo.Controller.appInfo.id;
 
-		this.controller.serviceRequest('palm://com.palm.applicationManager',
+		this.cont.serviceRequest('palm://com.palm.applicationManager',
 			{
 			method:'open',
 			parameters:{target: url}
